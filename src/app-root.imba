@@ -1,8 +1,8 @@
-import {Add} from './tags/Add'
+import {Maps} from './tags/Maps'
+import {CityWidgets} from './tags/CityWidgets'
 import {Logo} from './tags/Logo'
-import confetti from 'canvas-confetti'
+import {State} from './tags/State'
 
-let counter = 0
 ### 
 Imba has a revolutionary styling syntax. Think of a pre-processor, mixed with a css utility framework like tailwind, mixed with javascript.
 Your styles will be compiled at build time, and there are no un-used styles or classes in your build.
@@ -24,10 +24,30 @@ You could create your entire app in a single document if you preferred. And comp
 ###
 
 tag app-root
+	state = new State
+
+	def mount
+		# Before displaying station it will be good to get the list of Ukrainian stations
+		let url = "https://api.waqi.info/search/?keyword=Ukraine&token=" + state.token
+		let search_res = await loadData url
+		state.stations = search_res.data
+		console.log state.stations.length
+		imba.commit()
+
+	def loadData url
+		let res = await window.fetch(url)
+		return res.json()
+
 	def render
 		<self>
-			<Logo>
-			<Card>
+			<a href="http://v2.imba.io" target="_blank"> <Logo>
+			<section>
+				<h1> "Карти показників якості повітря"
+				<Maps bind=state>
+			if state.stations.length > 0 then <section>
+				<h1> "Показники на українських станціях"
+				<CityWidgets bind=state>
+
 	###
 	Here we have some scoped CSS. Any css declared within a tag component is scoped to that component.
 	The style will not trickle down to elements within nested components. 
@@ -39,41 +59,16 @@ tag app-root
 	See if you can tell what styles are being applied.
 	###
 	css &
-		display: flex  
+		display: flex
 		fld: column  
 		ai:center
 		ta:center
 		bg:gray9 
+		color: purple1
+		ff: Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji
 		min-height: 100vh
+		pb: 10vw
 
-###
-This Card component could be in it's own document, 
-but we're just demonstrating that you may have multiple tags in a single document.
-###
-tag Card
-	def incr
-		counter++
-		if (counter % 10) is 0
-			confetti(origin:{y: .2})
-			console.log "Hurray!"
-		console.log "increase to {counter}"
-	def reset
-		counter = 0
-		console.log "reset to {counter}"
-	def render
-		<self>
-			<Add @click.incr> "{counter}"
-			<span.reset  @click.reset> "reset"
-	css &
-		bg: white ff: sans shadow: xl
-		w:300px py:2em px:2em radius: 2radius
-		display: flex fld: column jc: center ai: middle
-		& .reset
-			fs: 2xl
-			fw: bold
-			color: gray4 @hover: purple6 @active: purple8 
-			cursor: pointer user-select: none
-
-### Learn more about Imba 2 (Work In Progress Documentation)
-https://v2.imba.io/
-###
+	css h1
+		text-align: left
+		text-indent: 0.5em

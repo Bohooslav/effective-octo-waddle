@@ -1,6 +1,7 @@
 export tag Logo
 	css &
 		w:200px
+		d:block
 		my:10
 		$color: rgb(245, 224, 94)
 	def render

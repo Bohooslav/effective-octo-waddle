@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imba project</title>
-    <link href="./normalize.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Imba project</title>
+	<link href="./normalize.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"/> 
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+	<script src="./L.Map.Sync.js"></script>
+	<script src="./widget_aqiFeed.js"></script>
+	<style>
+@keyframes show_up {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+	</style>
 </head>
 <body>
-    <meta charset="utf-8">
-    <script src="./app.imba.js"></script>
-    <app-root></app-root>
+	<meta charset="utf-8">
+	<script src="./app.imba.js"></script>
+	<app-root></app-root>
 </body>
 </html>
