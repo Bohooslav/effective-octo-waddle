@@ -1,4 +1,6 @@
-# Imba 2 Template [![Netlify Status](https://api.netlify.com/api/v1/badges/57f0ad52-688e-4269-8cb1-77c32b61ee00/deploy-status)](https://app.netlify.com/sites/imba2-hello-world/deploys)
+# Imba 2  [![Netlify Status](https://api.netlify.com/api/v1/badges/57f0ad52-688e-4269-8cb1-77c32b61ee00/deploy-status)](https://app.netlify.com/sites/imba2-hello-world/deploys)
+
+https://Bohooslav.github.io/effective-octo-waddle
 
 A local project starter template for a Imba v2-alpha.
 
